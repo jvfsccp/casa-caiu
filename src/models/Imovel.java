@@ -2,37 +2,39 @@ package models;
 
 import java.util.Objects;
 
-public abstract class Imovel implements Calculavel {
-    private int id;
+public class Imovel {
+    private int idImovel;
+    private int idTipo;
     private String endereco;
-    private double area;
-    private double valorBase;
-    private String tipoTransacao; // Venda ou Aluguel
+    private int idStatus;
 
-    // Construtor completo
-    public Imovel(int id, String endereco, double area, double valorBase, String tipoTransacao) {
-        this.id = id;
+    public Imovel(int idImovel, int idTipo, String endereco, int idStatus) {
+        this.idImovel = idImovel;
+        this.idTipo = idTipo;
         this.endereco = endereco;
-        this.area = area;
-        this.valorBase = valorBase;
-        this.tipoTransacao = tipoTransacao;
+        this.idStatus = idStatus;
     }
 
-    // Construtor sem ID (para novos registros)
-    public Imovel(String endereco, double area, double valorBase, String tipoTransacao) {
+    public Imovel(int idTipo, String endereco, int idStatus) {
+        this.idTipo = idTipo;
         this.endereco = endereco;
-        this.area = area;
-        this.valorBase = valorBase;
-        this.tipoTransacao = tipoTransacao;
+        this.idStatus = idStatus;
     }
 
-    // Getters e Setters
-    public int getId() {
-        return id;
+    public int getIdImovel() {
+        return idImovel;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdImovel(int idImovel) {
+        this.idImovel = idImovel;
+    }
+
+    public int getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(int idTipo) {
+        this.idTipo = idTipo;
     }
 
     public String getEndereco() {
@@ -43,57 +45,34 @@ public abstract class Imovel implements Calculavel {
         this.endereco = endereco;
     }
 
-    public double getArea() {
-        return area;
+    public int getIdStatus() {
+        return idStatus;
     }
 
-    public void setArea(double area) {
-        this.area = area;
+    public void setIdStatus(int idStatus) {
+        this.idStatus = idStatus;
     }
 
-    public double getValorBase() {
-        return valorBase;
-    }
-
-    public void setValorBase(double valorBase) {
-        this.valorBase = valorBase;
-    }
-
-    public String getTipoTransacao() {
-        return tipoTransacao;
-    }
-
-    public void setTipoTransacao(String tipoTransacao) {
-        this.tipoTransacao = tipoTransacao;
-    }
-
-    // Método toString()
     @Override
     public String toString() {
         return "Imovel{" +
-                "id=" + id +
+                "idImovel=" + idImovel +
+                ", idTipo=" + idTipo +
                 ", endereco='" + endereco + '\'' +
-                ", area=" + area +
-                ", valorBase=" + valorBase +
-                ", tipoTransacao='" + tipoTransacao + '\'' +
+                ", idStatus=" + idStatus +
                 '}';
     }
 
-    // Métodos equals e hashCode (boa prática)
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Imovel imovel = (Imovel) o;
-        return id == imovel.id;
+        return idImovel == imovel.idImovel;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(idImovel);
     }
-
-    // O método calcularValor() é abstrato na interface, mas será implementado nas subclasses
-    // Para fins de polimorfismo, vamos garantir que ele esteja presente.
-    // A implementação será específica para cada tipo de imóvel.
 }

@@ -1,96 +1,91 @@
 package models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Visita {
-    private int id;
-    private Imovel imovel;
-    private Cliente cliente;
-    private Corretor corretor;
-    private LocalDateTime dataHora;
+    private int idVisita;
+    private int idImovel;
+    private int idCliente;
+    private int idCorretor;
+    private LocalDate dataVisita;
 
-    // Construtor completo
-    public Visita(int id, Imovel imovel, Cliente cliente, Corretor corretor, LocalDateTime dataHora) {
-        this.id = id;
-        this.imovel = imovel;
-        this.cliente = cliente;
-        this.corretor = corretor;
-        this.dataHora = dataHora;
+    public Visita(int idVisita, int idImovel, int idCliente, int idCorretor, LocalDate dataVisita) {
+        this.idVisita = idVisita;
+        this.idImovel = idImovel;
+        this.idCliente = idCliente;
+        this.idCorretor = idCorretor;
+        this.dataVisita = dataVisita;
     }
 
-    // Construtor sem ID (para novos registros)
-    public Visita(Imovel imovel, Cliente cliente, Corretor corretor, LocalDateTime dataHora) {
-        this.imovel = imovel;
-        this.cliente = cliente;
-        this.corretor = corretor;
-        this.dataHora = dataHora;
+    public Visita(int idImovel, int idCliente, int idCorretor, LocalDate dataVisita) {
+        this.idImovel = idImovel;
+        this.idCliente = idCliente;
+        this.idCorretor = idCorretor;
+        this.dataVisita = dataVisita;
     }
 
-    // Getters e Setters
-    public int getId() {
-        return id;
+    public int getIdVisita() {
+        return idVisita;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdVisita(int idVisita) {
+        this.idVisita = idVisita;
     }
 
-    public Imovel getImovel() {
-        return imovel;
+    public int getIdImovel() {
+        return idImovel;
     }
 
-    public void setImovel(Imovel imovel) {
-        this.imovel = imovel;
+    public void setIdImovel(int idImovel) {
+        this.idImovel = idImovel;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public Corretor getCorretor() {
-        return corretor;
+    public int getIdCorretor() {
+        return idCorretor;
     }
 
-    public void setCorretor(Corretor corretor) {
-        this.corretor = corretor;
+    public void setIdCorretor(int idCorretor) {
+        this.idCorretor = idCorretor;
     }
 
-    public LocalDateTime getDataHora() {
-        return dataHora;
+    public LocalDate getDataVisita() {
+        return dataVisita;
     }
 
-    public void setDataHora(LocalDateTime dataHora) {
-        this.dataHora = dataHora;
+    public void setDataVisita(LocalDate dataVisita) {
+        this.dataVisita = dataVisita;
     }
 
-    // Método toString()
     @Override
     public String toString() {
         return "Visita{" +
-                "id=" + id +
-                ", imovel=" + imovel.getEndereco() +
-                ", cliente=" + cliente.getNome() +
-                ", corretor=" + corretor.getNome() +
-                ", dataHora=" + dataHora +
+                "idVisita=" + idVisita +
+                ", idImovel=" + idImovel +
+                ", idCliente=" + idCliente +
+                ", idCorretor=" + idCorretor +
+                ", dataVisita=" + dataVisita +
                 '}';
     }
 
-    // Métodos equals e hashCode (boa prática)
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Visita visita = (Visita) o;
-        return id == visita.id;
+        return idVisita == visita.idVisita;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(idVisita);
     }
 }
