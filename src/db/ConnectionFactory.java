@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectionFactory {
+import io.github.cdimascio.dotenv.Dotenv;
 
-    private static final String URL = "jdbc:mysql://localhost:3306/casa_caiu";
-    private static final String USER = "root";
-    private static final String PASSWORD = "password";       
+public class ConnectionFactory {
+    private static final Dotenv dotenv = Dotenv.load();
+
+    public static final String URL = dotenv.get("DB_URL");
+    public static final String USER = dotenv.get("DB_USER");
+    public static final String PASSWORD = dotenv.get("DB_PASS");
 
     public static Connection getConnection() {
         try {
