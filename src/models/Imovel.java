@@ -3,38 +3,38 @@ package models;
 import java.util.Objects;
 
 public class Imovel {
-    private int idImovel;
-    private int idTipo;
+    private int id; // PADRONIZADO
+    private int tipoImovelId; // PADRONIZADO
     private String endereco;
-    private int idStatus;
+    private int statusImovelId; // PADRONIZADO
 
-    public Imovel(int idImovel, int idTipo, String endereco, int idStatus) {
-        this.idImovel = idImovel;
-        this.idTipo = idTipo;
+    public Imovel(int id, int tipoImovelId, String endereco, int statusImovelId) { // PADRONIZADO
+        this.id = id;
+        this.tipoImovelId = tipoImovelId;
         this.endereco = endereco;
-        this.idStatus = idStatus;
+        this.statusImovelId = statusImovelId;
     }
 
-    public Imovel(int idTipo, String endereco, int idStatus) {
-        this.idTipo = idTipo;
+    public Imovel(int tipoImovelId, String endereco, int statusImovelId) { // PADRONIZADO
+        this.tipoImovelId = tipoImovelId;
         this.endereco = endereco;
-        this.idStatus = idStatus;
+        this.statusImovelId = statusImovelId;
     }
 
-    public int getIdImovel() {
-        return idImovel;
+    public int getId() { // PADRONIZADO
+        return id;
     }
 
-    public void setIdImovel(int idImovel) {
-        this.idImovel = idImovel;
+    public void setId(int id) { // PADRONIZADO
+        this.id = id;
     }
 
-    public int getIdTipo() {
-        return idTipo;
+    public int getTipoImovelId() { // PADRONIZADO
+        return tipoImovelId;
     }
 
-    public void setIdTipo(int idTipo) {
-        this.idTipo = idTipo;
+    public void setTipoImovelId(int tipoImovelId) { // PADRONIZADO
+        this.tipoImovelId = tipoImovelId;
     }
 
     public String getEndereco() {
@@ -45,21 +45,21 @@ public class Imovel {
         this.endereco = endereco;
     }
 
-    public int getIdStatus() {
-        return idStatus;
+    public int getStatusImovelId() { // PADRONIZADO
+        return statusImovelId;
     }
 
-    public void setIdStatus(int idStatus) {
-        this.idStatus = idStatus;
+    public void setStatusImovelId(int statusImovelId) { // PADRONIZADO
+        this.statusImovelId = statusImovelId;
     }
 
     @Override
     public String toString() {
         return "Imovel{" +
-                "idImovel=" + idImovel +
-                ", idTipo=" + idTipo +
+                "id=" + id + // PADRONIZADO
+                ", tipoImovelId=" + tipoImovelId + // PADRONIZADO
                 ", endereco='" + endereco + '\'' +
-                ", idStatus=" + idStatus +
+                ", statusImovelId=" + statusImovelId + // PADRONIZADO
                 '}';
     }
 
@@ -68,11 +68,11 @@ public class Imovel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Imovel imovel = (Imovel) o;
-        return idImovel == imovel.idImovel;
+        return id == imovel.id; // PADRONIZADO
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idImovel);
+        return Objects.hash(id); // PADRONIZADO
     }
 }

@@ -3,15 +3,15 @@ package models;
 import java.util.Objects;
 
 public class Corretor {
-    private int idCorretor;
+    private int id; // PADRONIZADO
     private String cpf;
     private String nome;
     private String creci;
     private String telefone;
     private String email;
 
-    public Corretor(int idCorretor, String cpf, String nome, String creci, String telefone, String email) {
-        this.idCorretor = idCorretor;
+    public Corretor(int id, String cpf, String nome, String creci, String telefone, String email) { // PADRONIZADO
+        this.id = id;
         this.cpf = cpf;
         this.nome = nome;
         this.creci = creci;
@@ -27,12 +27,12 @@ public class Corretor {
         this.email = email;
     }
 
-    public int getIdCorretor() {
-        return idCorretor;
+    public int getId() { // PADRONIZADO
+        return id;
     }
 
-    public void setIdCorretor(int idCorretor) {
-        this.idCorretor = idCorretor;
+    public void setId(int id) { // PADRONIZADO
+        this.id = id;
     }
 
     public String getCpf() {
@@ -78,7 +78,7 @@ public class Corretor {
     @Override
     public String toString() {
         return "Corretor{" +
-                "idCorretor=" + idCorretor +
+                "id=" + id + // PADRONIZADO
                 ", cpf='" + cpf + '\'' +
                 ", nome='" + nome + '\'' +
                 ", creci='" + creci + '\'' +
@@ -92,11 +92,11 @@ public class Corretor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Corretor corretor = (Corretor) o;
-        return idCorretor == corretor.idCorretor;
+        return id == corretor.id; // PADRONIZADO
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idCorretor);
+        return Objects.hash(id); // PADRONIZADO
     }
 }

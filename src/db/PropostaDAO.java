@@ -14,17 +14,17 @@ public class PropostaDAO {
 
     // CREATE
     public boolean inserir(Proposta proposta) {
-        String sql = "INSERT INTO proposta (id_imovel, id_cliente, data_proposta) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO propostas (imovel_id, cliente_id, data_proposta) VALUES (?, ?, ?)"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, proposta.getIdImovel());
-            stmt.setInt(2, proposta.getIdCliente());
+            stmt.setInt(1, proposta.getImovelId()); // PADRONIZADO
+            stmt.setInt(2, proposta.getClienteId()); // PADRONIZADO
             stmt.setDate(3, Date.valueOf(proposta.getDataProposta()));
             
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected > 0) {
                 ResultSet rs = stmt.getGeneratedKeys();
                 if (rs.next()) {
-                    proposta.setIdProposta(rs.getInt(1));
+                    proposta.setId(rs.getInt(1)); // PADRONIZADO
                 }
                 return true;
             }
@@ -36,17 +36,17 @@ public class PropostaDAO {
     }
 
     // READ
-    public Proposta buscarPorId(int idProposta) {
-        String sql = "SELECT * FROM proposta WHERE id_proposta = ?";
+    public Proposta buscarPorId(int id) { // PADRONIZADO
+        String sql = "SELECT * FROM propostas WHERE id = ?"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, idProposta);
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
                 return new Proposta(
-                    rs.getInt("id_proposta"),
-                    rs.getInt("id_imovel"),
-                    rs.getInt("id_cliente"),
+                    rs.getInt("id"), // PADRONIZADO
+                    rs.getInt("imovel_id"), // PADRONIZADO
+                    rs.getInt("cliente_id"), // PADRONIZADO
                     rs.getDate("data_proposta").toLocalDate()
                 );
             }
@@ -59,16 +59,16 @@ public class PropostaDAO {
 
     public ArrayList<Proposta> listarTodos() {
         ArrayList<Proposta> propostas = new ArrayList<>();
-        String sql = "SELECT * FROM proposta ORDER BY data_proposta DESC";
+        String sql = "SELECT * FROM propostas ORDER BY data_proposta DESC"; // PADRONIZADO
         
         try (PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             
             while (rs.next()) {
                 propostas.add(new Proposta(
-                    rs.getInt("id_proposta"),
-                    rs.getInt("id_imovel"),
-                    rs.getInt("id_cliente"),
+                    rs.getInt("id"), // PADRONIZADO
+                    rs.getInt("imovel_id"), // PADRONIZADO
+                    rs.getInt("cliente_id"), // PADRONIZADO
                     rs.getDate("data_proposta").toLocalDate()
                 ));
             }
@@ -81,12 +81,12 @@ public class PropostaDAO {
 
     // UPDATE
     public boolean atualizar(Proposta proposta) {
-        String sql = "UPDATE proposta SET id_imovel = ?, id_cliente = ?, data_proposta = ? WHERE id_proposta = ?";
+        String sql = "UPDATE propostas SET imovel_id = ?, cliente_id = ?, data_proposta = ? WHERE id = ?"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, proposta.getIdImovel());
-            stmt.setInt(2, proposta.getIdCliente());
+            stmt.setInt(1, proposta.getImovelId()); // PADRONIZADO
+            stmt.setInt(2, proposta.getClienteId()); // PADRONIZADO
             stmt.setDate(3, Date.valueOf(proposta.getDataProposta()));
-            stmt.setInt(4, proposta.getIdProposta());
+            stmt.setInt(4, proposta.getId()); // PADRONIZADO
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Erro ao atualizar proposta: " + e.getMessage());
@@ -96,10 +96,10 @@ public class PropostaDAO {
     }
 
     // DELETE
-    public boolean excluir(int idProposta) {
-        String sql = "DELETE FROM proposta WHERE id_proposta = ?";
+    public boolean excluir(int id) { // PADRONIZADO
+        String sql = "DELETE FROM propostas WHERE id = ?"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, idProposta);
+            stmt.setInt(1, id);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Erro ao excluir proposta: " + e.getMessage());
@@ -109,19 +109,19 @@ public class PropostaDAO {
     }
 
     // CONSULTAS ESPECIAIS
-    public ArrayList<Proposta> buscarPorImovel(int idImovel) {
+    public ArrayList<Proposta> buscarPorImovel(int imovelId) { // PADRONIZADO
         ArrayList<Proposta> propostas = new ArrayList<>();
-        String sql = "SELECT * FROM proposta WHERE id_imovel = ? ORDER BY data_proposta DESC";
+        String sql = "SELECT * FROM propostas WHERE imovel_id = ? ORDER BY data_proposta DESC"; // PADRONIZADO
         
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, idImovel);
+            stmt.setInt(1, imovelId);
             ResultSet rs = stmt.executeQuery();
             
             while (rs.next()) {
                 propostas.add(new Proposta(
-                    rs.getInt("id_proposta"),
-                    rs.getInt("id_imovel"),
-                    rs.getInt("id_cliente"),
+                    rs.getInt("id"), // PADRONIZADO
+                    rs.getInt("imovel_id"), // PADRONIZADO
+                    rs.getInt("cliente_id"), // PADRONIZADO
                     rs.getDate("data_proposta").toLocalDate()
                 ));
             }
@@ -132,19 +132,19 @@ public class PropostaDAO {
         return propostas;
     }
 
-    public ArrayList<Proposta> buscarPorCliente(int idCliente) {
+    public ArrayList<Proposta> buscarPorCliente(int clienteId) { // PADRONIZADO
         ArrayList<Proposta> propostas = new ArrayList<>();
-        String sql = "SELECT * FROM proposta WHERE id_cliente = ? ORDER BY data_proposta DESC";
+        String sql = "SELECT * FROM propostas WHERE cliente_id = ? ORDER BY data_proposta DESC"; // PADRONIZADO
         
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, idCliente);
+            stmt.setInt(1, clienteId);
             ResultSet rs = stmt.executeQuery();
             
             while (rs.next()) {
                 propostas.add(new Proposta(
-                    rs.getInt("id_proposta"),
-                    rs.getInt("id_imovel"),
-                    rs.getInt("id_cliente"),
+                    rs.getInt("id"), // PADRONIZADO
+                    rs.getInt("imovel_id"), // PADRONIZADO
+                    rs.getInt("cliente_id"), // PADRONIZADO
                     rs.getDate("data_proposta").toLocalDate()
                 ));
             }
@@ -157,7 +157,7 @@ public class PropostaDAO {
 
     public ArrayList<Proposta> buscarPorData(LocalDate data) {
         ArrayList<Proposta> propostas = new ArrayList<>();
-        String sql = "SELECT * FROM proposta WHERE data_proposta = ?";
+        String sql = "SELECT * FROM propostas WHERE data_proposta = ?"; // PADRONIZADO
         
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setDate(1, Date.valueOf(data));
@@ -165,9 +165,9 @@ public class PropostaDAO {
             
             while (rs.next()) {
                 propostas.add(new Proposta(
-                    rs.getInt("id_proposta"),
-                    rs.getInt("id_imovel"),
-                    rs.getInt("id_cliente"),
+                    rs.getInt("id"), // PADRONIZADO
+                    rs.getInt("imovel_id"), // PADRONIZADO
+                    rs.getInt("cliente_id"), // PADRONIZADO
                     rs.getDate("data_proposta").toLocalDate()
                 ));
             }
@@ -178,43 +178,10 @@ public class PropostaDAO {
         return propostas;
     }
 
-    public ArrayList<String> listarComDetalhes() {
-        ArrayList<String> detalhes = new ArrayList<>();
-        String sql = "SELECT p.id_proposta, p.data_proposta, " +
-                    "i.endereco, t.descricao as tipo_imovel, " +
-                    "c.nome as nome_cliente, c.telefone as telefone_cliente " +
-                    "FROM proposta p " +
-                    "INNER JOIN imovel i ON p.id_imovel = i.id_imovel " +
-                    "INNER JOIN tipo_imovel t ON i.id_tipo = t.id_tipo " +
-                    "INNER JOIN cliente c ON p.id_cliente = c.id_cliente " +
-                    "ORDER BY p.data_proposta DESC";
-        
-        try (PreparedStatement stmt = connection.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-            
-            while (rs.next()) {
-                String detalhe = String.format(
-                    "Proposta #%d | Data: %s | Imóvel: %s (%s) | Cliente: %s (%s)",
-                    rs.getInt("id_proposta"),
-                    rs.getDate("data_proposta").toLocalDate(),
-                    rs.getString("endereco"),
-                    rs.getString("tipo_imovel"),
-                    rs.getString("nome_cliente"),
-                    rs.getString("telefone_cliente")
-                );
-                detalhes.add(detalhe);
-            }
-        } catch (SQLException e) {
-            System.err.println("Erro ao listar propostas com detalhes: " + e.getMessage());
-            e.printStackTrace();
-        }
-        return detalhes;
-    }
-
-    public int contarPropostasPorImovel(int idImovel) {
-        String sql = "SELECT COUNT(*) as total FROM proposta WHERE id_imovel = ?";
+    public int contarPropostasPorImovel(int imovelId) { // PADRONIZADO
+        String sql = "SELECT COUNT(*) as total FROM propostas WHERE imovel_id = ?"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, idImovel);
+            stmt.setInt(1, imovelId);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return rs.getInt("total");
@@ -226,10 +193,10 @@ public class PropostaDAO {
         return 0;
     }
 
-    public int contarPropostasPorCliente(int idCliente) {
-        String sql = "SELECT COUNT(*) as total FROM proposta WHERE id_cliente = ?";
+    public int contarPropostasPorCliente(int clienteId) { // PADRONIZADO
+        String sql = "SELECT COUNT(*) as total FROM propostas WHERE cliente_id = ?"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, idCliente);
+            stmt.setInt(1, clienteId);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return rs.getInt("total");

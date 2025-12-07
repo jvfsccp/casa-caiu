@@ -79,7 +79,6 @@ public class MenuImoveis {
     private void inserirImovel() {
         System.out.println("\n--- INSERIR IMÓVEL ---");
         
-        // Listar tipos disponíveis
         ArrayList<TipoImovel> tipos = tipoImovelDAO.listarTodos();
         if (tipos.isEmpty()) {
             System.out.println("❌ Nenhum tipo de imóvel cadastrado! Cadastre primeiro.");
@@ -87,17 +86,14 @@ public class MenuImoveis {
         }
         
         System.out.println("Tipos disponíveis:");
-        for (TipoImovel t : tipos) {
-            System.out.println(t.getIdTipo() + " - " + t.getDescricao());
-        }
+        tipos.forEach(t -> System.out.printf("ID: %d | Descrição: %s\n", t.getId(), t.getDescricao()));
         System.out.print("Escolha o ID do tipo: ");
-        int idTipo = scanner.nextInt();
+        int tipoImovelId = scanner.nextInt();
         scanner.nextLine();
         
         System.out.print("Endereço: ");
         String endereco = scanner.nextLine();
         
-        // Listar status disponíveis
         ArrayList<StatusImovel> status = statusImovelDAO.listarTodos();
         if (status.isEmpty()) {
             System.out.println("❌ Nenhum status de imóvel cadastrado! Cadastre primeiro.");
@@ -105,16 +101,14 @@ public class MenuImoveis {
         }
         
         System.out.println("Status disponíveis:");
-        for (StatusImovel s : status) {
-            System.out.println(s.getIdStatus() + " - " + s.getDescricao());
-        }
+        status.forEach(s -> System.out.printf("ID: %d | Descrição: %s\n", s.getId(), s.getDescricao()));
         System.out.print("Escolha o ID do status: ");
-        int idStatus = scanner.nextInt();
+        int statusImovelId = scanner.nextInt();
         scanner.nextLine();
 
-        Imovel imovel = new Imovel(idTipo, endereco, idStatus);
+        Imovel imovel = new Imovel(tipoImovelId, endereco, statusImovelId);
         if (imovelDAO.inserir(imovel)) {
-            System.out.println("✅ Imóvel inserido com sucesso! ID: " + imovel.getIdImovel());
+            System.out.println("✅ Imóvel inserido com sucesso! ID: " + imovel.getId());
         } else {
             System.out.println("❌ Erro ao inserir imóvel!");
         }
@@ -137,28 +131,22 @@ public class MenuImoveis {
                 imoveis = imovelDAO.listarTodos();
                 break;
             case 2:
-                // Listar tipos disponíveis
                 ArrayList<TipoImovel> tipos = tipoImovelDAO.listarTodos();
                 System.out.println("Tipos disponíveis:");
-                for (TipoImovel t : tipos) {
-                    System.out.println(t.getIdTipo() + " - " + t.getDescricao());
-                }
+                tipos.forEach(t -> System.out.printf("ID: %d | Descrição: %s\n", t.getId(), t.getDescricao()));
                 System.out.print("Escolha o ID do tipo: ");
-                int idTipo = scanner.nextInt();
+                int tipoId = scanner.nextInt();
                 scanner.nextLine();
-                imoveis = imovelDAO.buscarPorTipo(idTipo);
+                imoveis = imovelDAO.buscarPorTipo(tipoId);
                 break;
             case 3:
-                // Listar status disponíveis
                 ArrayList<StatusImovel> status = statusImovelDAO.listarTodos();
                 System.out.println("Status disponíveis:");
-                for (StatusImovel s : status) {
-                    System.out.println(s.getIdStatus() + " - " + s.getDescricao());
-                }
+                status.forEach(s -> System.out.printf("ID: %d | Descrição: %s\n", s.getId(), s.getDescricao()));
                 System.out.print("Escolha o ID do status: ");
-                int idStatus = scanner.nextInt();
+                int statusId = scanner.nextInt();
                 scanner.nextLine();
-                imoveis = imovelDAO.buscarPorStatus(idStatus);
+                imoveis = imovelDAO.buscarPorStatus(statusId);
                 break;
             case 4:
                 System.out.print("Digite parte do endereço: ");
@@ -174,11 +162,13 @@ public class MenuImoveis {
             System.out.println("📋 Nenhum imóvel encontrado.");
         } else {
             System.out.println("\n📋 Imóveis encontrados: " + imoveis.size());
-            System.out.println("════════════════════════════════════════════════════════════");
-            for (Imovel imovel : imoveis) {
-                System.out.println(imovel);
-                System.out.println("────────────────────────────────────────────────────────────");
-            }
+            imoveis.forEach(imovel -> System.out.printf(
+                "ID: %d | Endereço: %s | Tipo ID: %d | Status ID: %d\n",
+                imovel.getId(),
+                imovel.getEndereco(),
+                imovel.getTipoImovelId(),
+                imovel.getStatusImovelId()
+            ));
         }
     }
 
@@ -190,7 +180,13 @@ public class MenuImoveis {
         Imovel imovel = imovelDAO.buscarPorId(id);
         if (imovel != null) {
             System.out.println("✅ Imóvel encontrado:");
-            System.out.println(imovel);
+            System.out.printf(
+                "ID: %d | Endereço: %s | Tipo ID: %d | Status ID: %d\n",
+                imovel.getId(),
+                imovel.getEndereco(),
+                imovel.getTipoImovelId(),
+                imovel.getStatusImovelId()
+            );
         } else {
             System.out.println("❌ Imóvel não encontrado!");
         }
@@ -208,18 +204,22 @@ public class MenuImoveis {
             return;
         }
 
-        System.out.println("Imóvel atual: " + imovel);
+        System.out.println("Imóvel atual: ");
+        System.out.printf(
+            "ID: %d | Endereço: %s | Tipo ID: %d | Status ID: %d\n",
+            imovel.getId(),
+            imovel.getEndereco(),
+            imovel.getTipoImovelId(),
+            imovel.getStatusImovelId()
+        );
         
-        // Atualizar tipo
         ArrayList<TipoImovel> tipos = tipoImovelDAO.listarTodos();
         System.out.println("Tipos disponíveis:");
-        for (TipoImovel t : tipos) {
-            System.out.println(t.getIdTipo() + " - " + t.getDescricao());
-        }
-        System.out.print("Novo ID do tipo (atual: " + imovel.getIdTipo() + ", Enter para manter): ");
+        tipos.forEach(t -> System.out.printf("ID: %d | Descrição: %s\n", t.getId(), t.getDescricao()));
+        System.out.print("Novo ID do tipo (atual: " + imovel.getTipoImovelId() + ", Enter para manter): ");
         String tipoStr = scanner.nextLine();
         if (!tipoStr.isEmpty()) {
-            imovel.setIdTipo(Integer.parseInt(tipoStr));
+            imovel.setTipoImovelId(Integer.parseInt(tipoStr));
         }
         
         System.out.print("Novo Endereço (atual: " + imovel.getEndereco() + ", Enter para manter): ");
@@ -228,16 +228,13 @@ public class MenuImoveis {
             imovel.setEndereco(endereco);
         }
         
-        // Atualizar status
         ArrayList<StatusImovel> status = statusImovelDAO.listarTodos();
         System.out.println("Status disponíveis:");
-        for (StatusImovel s : status) {
-            System.out.println(s.getIdStatus() + " - " + s.getDescricao());
-        }
-        System.out.print("Novo ID do status (atual: " + imovel.getIdStatus() + ", Enter para manter): ");
+        status.forEach(s -> System.out.printf("ID: %d | Descrição: %s\n", s.getId(), s.getDescricao()));
+        System.out.print("Novo ID do status (atual: " + imovel.getStatusImovelId() + ", Enter para manter): ");
         String statusStr = scanner.nextLine();
         if (!statusStr.isEmpty()) {
-            imovel.setIdStatus(Integer.parseInt(statusStr));
+            imovel.setStatusImovelId(Integer.parseInt(statusStr));
         }
 
         if (imovelDAO.atualizar(imovel)) {
@@ -259,7 +256,14 @@ public class MenuImoveis {
             return;
         }
 
-        System.out.println("Imóvel a ser deletado: " + imovel);
+        System.out.println("Imóvel a ser deletado: ");
+        System.out.printf(
+            "ID: %d | Endereço: %s | Tipo ID: %d | Status ID: %d\n",
+            imovel.getId(),
+            imovel.getEndereco(),
+            imovel.getTipoImovelId(),
+            imovel.getStatusImovelId()
+        );
         System.out.print("Confirma a exclusão? (S/N): ");
         String confirmacao = scanner.next();
 
@@ -288,9 +292,7 @@ public class MenuImoveis {
             case 1:
                 ArrayList<TipoImovel> tipos = tipoImovelDAO.listarTodos();
                 System.out.println("\n📋 Tipos cadastrados:");
-                for (TipoImovel t : tipos) {
-                    System.out.println(t);
-                }
+                tipos.forEach(t -> System.out.printf("ID: %d | Descrição: %s\n", t.getId(), t.getDescricao()));
                 break;
             case 2:
                 System.out.print("Descrição do tipo: ");
@@ -341,9 +343,7 @@ public class MenuImoveis {
             case 1:
                 ArrayList<StatusImovel> statusList = statusImovelDAO.listarTodos();
                 System.out.println("\n📋 Status cadastrados:");
-                for (StatusImovel s : statusList) {
-                    System.out.println(s);
-                }
+                statusList.forEach(s -> System.out.printf("ID: %d | Descrição: %s\n", s.getId(), s.getDescricao()));
                 break;
             case 2:
                 System.out.print("Descrição do status: ");

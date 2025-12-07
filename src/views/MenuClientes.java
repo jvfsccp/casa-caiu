@@ -63,7 +63,6 @@ public class MenuClientes {
     private void inserirCliente() {
         System.out.println("\n--- INSERIR CLIENTE ---");
         
-        // CPF
         String cpf;
         do {
             System.out.print("CPF (11 dígitos): ");
@@ -88,7 +87,6 @@ public class MenuClientes {
         System.out.print("Email: ");
         String email = scanner.nextLine();
 
-        // Validar se email já existe
         if (clienteDAO.emailExiste(email)) {
             System.out.println("❌ Email já cadastrado!");
             return;
@@ -96,7 +94,7 @@ public class MenuClientes {
 
         Cliente cliente = new Cliente(cpf, nome, telefone, email);
         if (clienteDAO.inserir(cliente)) {
-            System.out.println("✅ Cliente inserido com sucesso! ID: " + cliente.getIdCliente());
+            System.out.println("✅ Cliente inserido com sucesso! ID: " + cliente.getId());
         } else {
             System.out.println("❌ Erro ao inserir cliente!");
         }
@@ -139,11 +137,10 @@ public class MenuClientes {
             System.out.println("📋 Nenhum cliente encontrado.");
         } else {
             System.out.println("\n📋 Clientes encontrados: " + clientes.size());
-            System.out.println("════════════════════════════════════════════════════════════");
-            for (Cliente c : clientes) {
-                System.out.println(c);
-                System.out.println("────────────────────────────────────────────────────────────");
-            }
+            clientes.forEach(c -> System.out.printf(
+                "ID: %d | Nome: %s | CPF: %s | Telefone: %s | Email: %s\n",
+                c.getId(), c.getNome(), c.getCpf(), c.getTelefone(), c.getEmail()
+            ));
         }
     }
 
@@ -175,7 +172,10 @@ public class MenuClientes {
 
         if (cliente != null) {
             System.out.println("✅ Cliente encontrado:");
-            System.out.println(cliente);
+            System.out.printf(
+                "ID: %d | Nome: %s | CPF: %s | Telefone: %s | Email: %s\n",
+                cliente.getId(), cliente.getNome(), cliente.getCpf(), cliente.getTelefone(), cliente.getEmail()
+            );
         } else {
             System.out.println("❌ Cliente não encontrado!");
         }
@@ -193,7 +193,11 @@ public class MenuClientes {
             return;
         }
 
-        System.out.println("Cliente atual: " + cliente);
+        System.out.println("Cliente atual:");
+        System.out.printf(
+            "ID: %d | Nome: %s | CPF: %s | Telefone: %s | Email: %s\n",
+            cliente.getId(), cliente.getNome(), cliente.getCpf(), cliente.getTelefone(), cliente.getEmail()
+        );
         
         System.out.print("Novo CPF (atual: " + cliente.getCpf() + "): ");
         String cpf = scanner.nextLine();
@@ -234,7 +238,11 @@ public class MenuClientes {
             return;
         }
 
-        System.out.println("Cliente a ser deletado: " + cliente);
+        System.out.println("Cliente a ser deletado:");
+        System.out.printf(
+            "ID: %d | Nome: %s | CPF: %s | Telefone: %s | Email: %s\n",
+            cliente.getId(), cliente.getNome(), cliente.getCpf(), cliente.getTelefone(), cliente.getEmail()
+        );
         System.out.print("Confirma a exclusão? (S/N): ");
         String confirmacao = scanner.next();
 

@@ -63,7 +63,6 @@ public class MenuCorretores {
     private void inserirCorretor() {
         System.out.println("\n--- INSERIR CORRETOR ---");
         
-        // CPF
         String cpf;
         do {
             System.out.print("CPF (11 dígitos): ");
@@ -82,7 +81,6 @@ public class MenuCorretores {
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
         
-        // CRECI
         String creci;
         do {
             System.out.print("CRECI: ");
@@ -100,7 +98,6 @@ public class MenuCorretores {
         System.out.print("Email: ");
         String email = scanner.nextLine();
 
-        // Validar se email já existe
         if (corretorDAO.emailExiste(email)) {
             System.out.println("❌ Email já cadastrado!");
             return;
@@ -108,7 +105,7 @@ public class MenuCorretores {
 
         Corretor corretor = new Corretor(cpf, nome, creci, telefone, email);
         if (corretorDAO.inserir(corretor)) {
-            System.out.println("✅ Corretor inserido com sucesso! ID: " + corretor.getIdCorretor());
+            System.out.println("✅ Corretor inserido com sucesso! ID: " + corretor.getId());
         } else {
             System.out.println("❌ Erro ao inserir corretor!");
         }
@@ -160,11 +157,10 @@ public class MenuCorretores {
             System.out.println("📋 Nenhum corretor encontrado.");
         } else {
             System.out.println("\n📋 Corretores encontrados: " + corretores.size());
-            System.out.println("════════════════════════════════════════════════════════════");
-            for (Corretor c : corretores) {
-                System.out.println(c);
-                System.out.println("────────────────────────────────────────────────────────────");
-            }
+            corretores.forEach(c -> System.out.printf(
+                "ID: %d | Nome: %s | CRECI: %s | CPF: %s | Telefone: %s | Email: %s\n",
+                c.getId(), c.getNome(), c.getCreci(), c.getCpf(), c.getTelefone(), c.getEmail()
+            ));
         }
     }
 
@@ -196,7 +192,10 @@ public class MenuCorretores {
 
         if (corretor != null) {
             System.out.println("✅ Corretor encontrado:");
-            System.out.println(corretor);
+            System.out.printf(
+                "ID: %d | Nome: %s | CRECI: %s | CPF: %s | Telefone: %s | Email: %s\n",
+                corretor.getId(), corretor.getNome(), corretor.getCreci(), corretor.getCpf(), corretor.getTelefone(), corretor.getEmail()
+            );
         } else {
             System.out.println("❌ Corretor não encontrado!");
         }
@@ -214,7 +213,11 @@ public class MenuCorretores {
             return;
         }
 
-        System.out.println("Corretor atual: " + corretor);
+        System.out.println("Corretor atual:");
+        System.out.printf(
+            "ID: %d | Nome: %s | CRECI: %s | CPF: %s | Telefone: %s | Email: %s\n",
+            corretor.getId(), corretor.getNome(), corretor.getCreci(), corretor.getCpf(), corretor.getTelefone(), corretor.getEmail()
+        );
         
         System.out.print("Novo CPF (atual: " + corretor.getCpf() + "): ");
         String cpf = scanner.nextLine();
@@ -259,7 +262,11 @@ public class MenuCorretores {
             return;
         }
 
-        System.out.println("Corretor a ser deletado: " + corretor);
+        System.out.println("Corretor a ser deletado:");
+        System.out.printf(
+            "ID: %d | Nome: %s | CRECI: %s | CPF: %s | Telefone: %s | Email: %s\n",
+            corretor.getId(), corretor.getNome(), corretor.getCreci(), corretor.getCpf(), corretor.getTelefone(), corretor.getEmail()
+        );
         System.out.print("Confirma a exclusão? (S/N): ");
         String confirmacao = scanner.next();
 

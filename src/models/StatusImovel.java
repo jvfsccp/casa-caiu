@@ -3,11 +3,11 @@ package models;
 import java.util.Objects;
 
 public class StatusImovel {
-    private int idStatus;
+    private int id; // PADRONIZADO
     private String descricao;
 
-    public StatusImovel(int idStatus, String descricao) {
-        this.idStatus = idStatus;
+    public StatusImovel(int id, String descricao) { // PADRONIZADO
+        this.id = id;
         this.descricao = descricao;
     }
 
@@ -15,12 +15,12 @@ public class StatusImovel {
         this.descricao = descricao;
     }
 
-    public int getIdStatus() {
-        return idStatus;
+    public int getId() { // PADRONIZADO
+        return id;
     }
 
-    public void setIdStatus(int idStatus) {
-        this.idStatus = idStatus;
+    public void setId(int id) { // PADRONIZADO
+        this.id = id;
     }
 
     public String getDescricao() {
@@ -34,7 +34,7 @@ public class StatusImovel {
     @Override
     public String toString() {
         return "StatusImovel{" +
-                "idStatus=" + idStatus +
+                "id=" + id + // PADRONIZADO
                 ", descricao='" + descricao + '\'' +
                 '}';
     }
@@ -44,11 +44,11 @@ public class StatusImovel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StatusImovel that = (StatusImovel) o;
-        return idStatus == that.idStatus;
+        return id == that.id; // PADRONIZADO
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idStatus);
+        return Objects.hash(id); // PADRONIZADO
     }
 }

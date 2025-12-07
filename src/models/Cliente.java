@@ -3,14 +3,14 @@ package models;
 import java.util.Objects;
 
 public class Cliente {
-    private int idCliente;
+    private int id; // PADRONIZADO
     private String cpf;
     private String nome;
     private String telefone;
     private String email;
 
-    public Cliente(int idCliente, String cpf, String nome, String telefone, String email) {
-        this.idCliente = idCliente;
+    public Cliente(int id, String cpf, String nome, String telefone, String email) { // PADRONIZADO
+        this.id = id;
         this.cpf = cpf;
         this.nome = nome;
         this.telefone = telefone;
@@ -24,12 +24,12 @@ public class Cliente {
         this.email = email;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public int getId() { // PADRONIZADO
+        return id;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setId(int id) { // PADRONIZADO
+        this.id = id;
     }
 
     public String getCpf() {
@@ -67,7 +67,7 @@ public class Cliente {
     @Override
     public String toString() {
         return "Cliente{" +
-                "idCliente=" + idCliente +
+                "id=" + id + // PADRONIZADO
                 ", cpf='" + cpf + '\'' +
                 ", nome='" + nome + '\'' +
                 ", telefone='" + telefone + '\'' +
@@ -80,11 +80,11 @@ public class Cliente {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return idCliente == cliente.idCliente;
+        return id == cliente.id; // PADRONIZADO
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idCliente);
+        return Objects.hash(id); // PADRONIZADO
     }
 }

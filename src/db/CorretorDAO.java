@@ -13,7 +13,7 @@ public class CorretorDAO {
 
     // CREATE
     public boolean inserir(Corretor corretor) {
-        String sql = "INSERT INTO corretor (cpf, nome, creci, telefone, email) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO corretores (cpf, nome, creci, telefone, email) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, corretor.getCpf());
             stmt.setString(2, corretor.getNome());
@@ -25,7 +25,7 @@ public class CorretorDAO {
             if (rowsAffected > 0) {
                 ResultSet rs = stmt.getGeneratedKeys();
                 if (rs.next()) {
-                    corretor.setIdCorretor(rs.getInt(1));
+                    corretor.setId(rs.getInt(1)); // PADRONIZADO
                 }
                 return true;
             }
@@ -37,15 +37,15 @@ public class CorretorDAO {
     }
 
     // READ
-    public Corretor buscarPorId(int idCorretor) {
-        String sql = "SELECT * FROM corretor WHERE id_corretor = ?";
+    public Corretor buscarPorId(int id) { // PADRONIZADO
+        String sql = "SELECT * FROM corretores WHERE id = ?"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, idCorretor);
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
                 return new Corretor(
-                    rs.getInt("id_corretor"),
+                    rs.getInt("id"), // PADRONIZADO
                     rs.getString("cpf"),
                     rs.getString("nome"),
                     rs.getString("creci"),
@@ -62,14 +62,14 @@ public class CorretorDAO {
 
     public ArrayList<Corretor> listarTodos() {
         ArrayList<Corretor> corretores = new ArrayList<>();
-        String sql = "SELECT * FROM corretor ORDER BY nome";
+        String sql = "SELECT * FROM corretores ORDER BY nome"; // PADRONIZADO
         
         try (PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             
             while (rs.next()) {
                 corretores.add(new Corretor(
-                    rs.getInt("id_corretor"),
+                    rs.getInt("id"), // PADRONIZADO
                     rs.getString("cpf"),
                     rs.getString("nome"),
                     rs.getString("creci"),
@@ -86,14 +86,14 @@ public class CorretorDAO {
 
     // UPDATE
     public boolean atualizar(Corretor corretor) {
-        String sql = "UPDATE corretor SET cpf = ?, nome = ?, creci = ?, telefone = ?, email = ? WHERE id_corretor = ?";
+        String sql = "UPDATE corretores SET cpf = ?, nome = ?, creci = ?, telefone = ?, email = ? WHERE id = ?"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, corretor.getCpf());
             stmt.setString(2, corretor.getNome());
             stmt.setString(3, corretor.getCreci());
             stmt.setString(4, corretor.getTelefone());
             stmt.setString(5, corretor.getEmail());
-            stmt.setInt(6, corretor.getIdCorretor());
+            stmt.setInt(6, corretor.getId()); // PADRONIZADO
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Erro ao atualizar corretor: " + e.getMessage());
@@ -103,10 +103,10 @@ public class CorretorDAO {
     }
 
     // DELETE
-    public boolean excluir(int idCorretor) {
-        String sql = "DELETE FROM corretor WHERE id_corretor = ?";
+    public boolean excluir(int id) { // PADRONIZADO
+        String sql = "DELETE FROM corretores WHERE id = ?"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, idCorretor);
+            stmt.setInt(1, id);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Erro ao excluir corretor: " + e.getMessage());
@@ -117,14 +117,14 @@ public class CorretorDAO {
 
     // CONSULTAS ESPECIAIS
     public Corretor buscarPorCpf(String cpf) {
-        String sql = "SELECT * FROM corretor WHERE cpf = ?";
+        String sql = "SELECT * FROM corretores WHERE cpf = ?"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, cpf);
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
                 return new Corretor(
-                    rs.getInt("id_corretor"),
+                    rs.getInt("id"), // PADRONIZADO
                     rs.getString("cpf"),
                     rs.getString("nome"),
                     rs.getString("creci"),
@@ -140,14 +140,14 @@ public class CorretorDAO {
     }
 
     public Corretor buscarPorCreci(String creci) {
-        String sql = "SELECT * FROM corretor WHERE creci = ?";
+        String sql = "SELECT * FROM corretores WHERE creci = ?"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, creci);
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
                 return new Corretor(
-                    rs.getInt("id_corretor"),
+                    rs.getInt("id"), // PADRONIZADO
                     rs.getString("cpf"),
                     rs.getString("nome"),
                     rs.getString("creci"),
@@ -164,7 +164,7 @@ public class CorretorDAO {
 
     public ArrayList<Corretor> buscarPorNome(String nome) {
         ArrayList<Corretor> corretores = new ArrayList<>();
-        String sql = "SELECT * FROM corretor WHERE nome LIKE ?";
+        String sql = "SELECT * FROM corretores WHERE nome LIKE ?"; // PADRONIZADO
         
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, "%" + nome + "%");
@@ -172,7 +172,7 @@ public class CorretorDAO {
             
             while (rs.next()) {
                 corretores.add(new Corretor(
-                    rs.getInt("id_corretor"),
+                    rs.getInt("id"), // PADRONIZADO
                     rs.getString("cpf"),
                     rs.getString("nome"),
                     rs.getString("creci"),
@@ -188,14 +188,14 @@ public class CorretorDAO {
     }
 
     public Corretor buscarPorEmail(String email) {
-        String sql = "SELECT * FROM corretor WHERE email = ?";
+        String sql = "SELECT * FROM corretores WHERE email = ?"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
                 return new Corretor(
-                    rs.getInt("id_corretor"),
+                    rs.getInt("id"), // PADRONIZADO
                     rs.getString("cpf"),
                     rs.getString("nome"),
                     rs.getString("creci"),
@@ -211,7 +211,7 @@ public class CorretorDAO {
     }
 
     public boolean cpfExiste(String cpf) {
-        String sql = "SELECT COUNT(*) as total FROM corretor WHERE cpf = ?";
+        String sql = "SELECT COUNT(*) as total FROM corretores WHERE cpf = ?"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, cpf);
             ResultSet rs = stmt.executeQuery();
@@ -226,7 +226,7 @@ public class CorretorDAO {
     }
 
     public boolean creciExiste(String creci) {
-        String sql = "SELECT COUNT(*) as total FROM corretor WHERE creci = ?";
+        String sql = "SELECT COUNT(*) as total FROM corretores WHERE creci = ?"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, creci);
             ResultSet rs = stmt.executeQuery();
@@ -241,7 +241,7 @@ public class CorretorDAO {
     }
 
     public boolean emailExiste(String email) {
-        String sql = "SELECT COUNT(*) as total FROM corretor WHERE email = ?";
+        String sql = "SELECT COUNT(*) as total FROM corretores WHERE email = ?"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
@@ -256,7 +256,7 @@ public class CorretorDAO {
     }
 
     public int contarCorretores() {
-        String sql = "SELECT COUNT(*) as total FROM corretor";
+        String sql = "SELECT COUNT(*) as total FROM corretores"; // PADRONIZADO
         try (PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {

@@ -4,46 +4,46 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Proposta {
-    private int idProposta;
-    private int idImovel;
-    private int idCliente;
+    private int id; // PADRONIZADO
+    private int imovelId; // PADRONIZADO
+    private int clienteId; // PADRONIZADO
     private LocalDate dataProposta;
 
-    public Proposta(int idProposta, int idImovel, int idCliente, LocalDate dataProposta) {
-        this.idProposta = idProposta;
-        this.idImovel = idImovel;
-        this.idCliente = idCliente;
+    public Proposta(int id, int imovelId, int clienteId, LocalDate dataProposta) { // PADRONIZADO
+        this.id = id;
+        this.imovelId = imovelId;
+        this.clienteId = clienteId;
         this.dataProposta = dataProposta;
     }
 
-    public Proposta(int idImovel, int idCliente, LocalDate dataProposta) {
-        this.idImovel = idImovel;
-        this.idCliente = idCliente;
+    public Proposta(int imovelId, int clienteId, LocalDate dataProposta) { // PADRONIZADO
+        this.imovelId = imovelId;
+        this.clienteId = clienteId;
         this.dataProposta = dataProposta;
     }
 
-    public int getIdProposta() {
-        return idProposta;
+    public int getId() { // PADRONIZADO
+        return id;
     }
 
-    public void setIdProposta(int idProposta) {
-        this.idProposta = idProposta;
+    public void setId(int id) { // PADRONIZADO
+        this.id = id;
     }
 
-    public int getIdImovel() {
-        return idImovel;
+    public int getImovelId() { // PADRONIZADO
+        return imovelId;
     }
 
-    public void setIdImovel(int idImovel) {
-        this.idImovel = idImovel;
+    public void setImovelId(int imovelId) { // PADRONIZADO
+        this.imovelId = imovelId;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public int getClienteId() { // PADRONIZADO
+        return clienteId;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setClienteId(int clienteId) { // PADRONIZADO
+        this.clienteId = clienteId;
     }
 
     public LocalDate getDataProposta() {
@@ -57,9 +57,9 @@ public class Proposta {
     @Override
     public String toString() {
         return "Proposta{" +
-                "idProposta=" + idProposta +
-                ", idImovel=" + idImovel +
-                ", idCliente=" + idCliente +
+                "id=" + id + // PADRONIZADO
+                ", imovelId=" + imovelId + // PADRONIZADO
+                ", clienteId=" + clienteId + // PADRONIZADO
                 ", dataProposta=" + dataProposta +
                 '}';
     }
@@ -69,11 +69,11 @@ public class Proposta {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Proposta proposta = (Proposta) o;
-        return idProposta == proposta.idProposta;
+        return id == proposta.id; // PADRONIZADO
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idProposta);
+        return Objects.hash(id); // PADRONIZADO
     }
 }
