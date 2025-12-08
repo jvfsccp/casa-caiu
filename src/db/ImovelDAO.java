@@ -11,19 +11,18 @@ public class ImovelDAO {
         this.connection = ConnectionFactory.getConnection();
     }
 
-    // CREATE
     public boolean inserir(Imovel imovel) {
-        String sql = "INSERT INTO imoveis (tipo_imovel_id, endereco, status_imovel_id) VALUES (?, ?, ?)"; // PADRONIZADO
+        String sql = "INSERT INTO imoveis (tipo_imovel_id, endereco, status_imovel_id) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, imovel.getTipoImovelId()); // PADRONIZADO
+            stmt.setInt(1, imovel.getTipoImovelId());
             stmt.setString(2, imovel.getEndereco());
-            stmt.setInt(3, imovel.getStatusImovelId()); // PADRONIZADO
+            stmt.setInt(3, imovel.getStatusImovelId());
             
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected > 0) {
                 ResultSet rs = stmt.getGeneratedKeys();
                 if (rs.next()) {
-                    imovel.setId(rs.getInt(1)); // PADRONIZADO
+                    imovel.setId(rs.getInt(1));
                 }
                 return true;
             }
@@ -34,19 +33,18 @@ public class ImovelDAO {
         return false;
     }
 
-    // READ
-    public Imovel buscarPorId(int id) { // PADRONIZADO
-        String sql = "SELECT * FROM imoveis WHERE id = ?"; // PADRONIZADO
+    public Imovel buscarPorId(int id) {
+        String sql = "SELECT * FROM imoveis WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
                 return new Imovel(
-                    rs.getInt("id"), // PADRONIZADO
-                    rs.getInt("tipo_imovel_id"), // PADRONIZADO
+                    rs.getInt("id"),
+                    rs.getInt("tipo_imovel_id"),
                     rs.getString("endereco"),
-                    rs.getInt("status_imovel_id") // PADRONIZADO
+                    rs.getInt("status_imovel_id")
                 );
             }
         } catch (SQLException e) {
@@ -58,17 +56,17 @@ public class ImovelDAO {
 
     public ArrayList<Imovel> listarTodos() {
         ArrayList<Imovel> imoveis = new ArrayList<>();
-        String sql = "SELECT * FROM imoveis"; // PADRONIZADO
+        String sql = "SELECT * FROM imoveis";
         
         try (PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             
             while (rs.next()) {
                 imoveis.add(new Imovel(
-                    rs.getInt("id"), // PADRONIZADO
-                    rs.getInt("tipo_imovel_id"), // PADRONIZADO
+                    rs.getInt("id"),
+                    rs.getInt("tipo_imovel_id"),
                     rs.getString("endereco"),
-                    rs.getInt("status_imovel_id") // PADRONIZADO
+                    rs.getInt("status_imovel_id")
                 ));
             }
         } catch (SQLException e) {
@@ -78,14 +76,13 @@ public class ImovelDAO {
         return imoveis;
     }
 
-    // UPDATE
     public boolean atualizar(Imovel imovel) {
-        String sql = "UPDATE imoveis SET tipo_imovel_id = ?, endereco = ?, status_imovel_id = ? WHERE id = ?"; // PADRONIZADO
+        String sql = "UPDATE imoveis SET tipo_imovel_id = ?, endereco = ?, status_imovel_id = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, imovel.getTipoImovelId()); // PADRONIZADO
+            stmt.setInt(1, imovel.getTipoImovelId());
             stmt.setString(2, imovel.getEndereco());
-            stmt.setInt(3, imovel.getStatusImovelId()); // PADRONIZADO
-            stmt.setInt(4, imovel.getId()); // PADRONIZADO
+            stmt.setInt(3, imovel.getStatusImovelId());
+            stmt.setInt(4, imovel.getId());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Erro ao atualizar imóvel: " + e.getMessage());
@@ -94,9 +91,8 @@ public class ImovelDAO {
         return false;
     }
 
-    // DELETE
-    public boolean excluir(int id) { // PADRONIZADO
-        String sql = "DELETE FROM imoveis WHERE id = ?"; // PADRONIZADO
+    public boolean excluir(int id) {
+        String sql = "DELETE FROM imoveis WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             return stmt.executeUpdate() > 0;
@@ -107,10 +103,9 @@ public class ImovelDAO {
         return false;
     }
 
-    // CONSULTAS ESPECIAIS
-    public ArrayList<Imovel> buscarPorTipo(int tipoImovelId) { // PADRONIZADO
+    public ArrayList<Imovel> buscarPorTipo(int tipoImovelId) {
         ArrayList<Imovel> imoveis = new ArrayList<>();
-        String sql = "SELECT * FROM imoveis WHERE tipo_imovel_id = ?"; // PADRONIZADO
+        String sql = "SELECT * FROM imoveis WHERE tipo_imovel_id = ?";
         
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, tipoImovelId);
@@ -118,10 +113,10 @@ public class ImovelDAO {
             
             while (rs.next()) {
                 imoveis.add(new Imovel(
-                    rs.getInt("id"), // PADRONIZADO
-                    rs.getInt("tipo_imovel_id"), // PADRONIZADO
+                    rs.getInt("id"),
+                    rs.getInt("tipo_imovel_id"),
                     rs.getString("endereco"),
-                    rs.getInt("status_imovel_id") // PADRONIZADO
+                    rs.getInt("status_imovel_id")
                 ));
             }
         } catch (SQLException e) {
@@ -131,9 +126,9 @@ public class ImovelDAO {
         return imoveis;
     }
 
-    public ArrayList<Imovel> buscarPorStatus(int statusImovelId) { // PADRONIZADO
+    public ArrayList<Imovel> buscarPorStatus(int statusImovelId) {
         ArrayList<Imovel> imoveis = new ArrayList<>();
-        String sql = "SELECT * FROM imoveis WHERE status_imovel_id = ?"; // PADRONIZADO
+        String sql = "SELECT * FROM imoveis WHERE status_imovel_id = ?";
         
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, statusImovelId);
@@ -141,10 +136,10 @@ public class ImovelDAO {
             
             while (rs.next()) {
                 imoveis.add(new Imovel(
-                    rs.getInt("id"), // PADRONIZADO
-                    rs.getInt("tipo_imovel_id"), // PADRONIZADO
+                    rs.getInt("id"),
+                    rs.getInt("tipo_imovel_id"),
                     rs.getString("endereco"),
-                    rs.getInt("status_imovel_id") // PADRONIZADO
+                    rs.getInt("status_imovel_id")
                 ));
             }
         } catch (SQLException e) {
@@ -156,7 +151,7 @@ public class ImovelDAO {
 
     public ArrayList<Imovel> buscarPorEndereco(String endereco) {
         ArrayList<Imovel> imoveis = new ArrayList<>();
-        String sql = "SELECT * FROM imoveis WHERE endereco LIKE ?"; // PADRONIZADO
+        String sql = "SELECT * FROM imoveis WHERE endereco LIKE ?";
         
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, "%" + endereco + "%");
@@ -164,10 +159,10 @@ public class ImovelDAO {
             
             while (rs.next()) {
                 imoveis.add(new Imovel(
-                    rs.getInt("id"), // PADRONIZADO
-                    rs.getInt("tipo_imovel_id"), // PADRONIZADO
+                    rs.getInt("id"),
+                    rs.getInt("tipo_imovel_id"),
                     rs.getString("endereco"),
-                    rs.getInt("status_imovel_id") // PADRONIZADO
+                    rs.getInt("status_imovel_id")
                 ));
             }
         } catch (SQLException e) {
@@ -178,7 +173,7 @@ public class ImovelDAO {
     }
 
     public int contarImoveis() {
-        String sql = "SELECT COUNT(*) as total FROM imoveis"; // PADRONIZADO
+        String sql = "SELECT COUNT(*) as total FROM imoveis";
         try (PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {

@@ -8,7 +8,6 @@ public class PopularDados {
     public static void popularTiposImovel() {
         TipoImovelDAO dao = new TipoImovelDAO();
         
-        // Verificar se já existem dados
         if (!dao.listarTodos().isEmpty()) {
             System.out.println("✅ Tipos de imóvel já cadastrados.");
             return;
@@ -33,7 +32,6 @@ public class PopularDados {
     public static void popularStatusImovel() {
         StatusImovelDAO dao = new StatusImovelDAO();
         
-        // Verificar se já existem dados
         if (!dao.listarTodos().isEmpty()) {
             System.out.println("✅ Status de imóvel já cadastrados.");
             return;

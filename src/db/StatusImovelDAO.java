@@ -11,7 +11,6 @@ public class StatusImovelDAO {
         this.connection = ConnectionFactory.getConnection();
     }
 
-    // CREATE
     public boolean inserir(StatusImovel status) {
         String sql = "INSERT INTO status_imoveis (descricao) VALUES (?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -32,7 +31,6 @@ public class StatusImovelDAO {
         return false;
     }
 
-    // READ
     public StatusImovel buscarPorId(int id) {
         String sql = "SELECT * FROM status_imoveis WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -54,7 +52,7 @@ public class StatusImovelDAO {
 
     public ArrayList<StatusImovel> listarTodos() {
         ArrayList<StatusImovel> statuses = new ArrayList<>();
-        String sql = "SELECT * FROM status_imoveis ORDER BY id"; // CORRIGIDO
+        String sql = "SELECT * FROM status_imoveis ORDER BY id";
         
         try (PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -72,7 +70,6 @@ public class StatusImovelDAO {
         return statuses;
     }
 
-    // UPDATE
     public boolean atualizar(StatusImovel status) {
         String sql = "UPDATE status_imoveis SET descricao = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -86,7 +83,6 @@ public class StatusImovelDAO {
         return false;
     }
 
-    // DELETE
     public boolean excluir(int id) {
         String sql = "DELETE FROM status_imoveis WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
