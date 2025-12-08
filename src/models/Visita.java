@@ -4,13 +4,13 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Visita {
-    private int id; // PADRONIZADO
-    private int imovelId; // PADRONIZADO
-    private int clienteId; // PADRONIZADO
-    private int corretorId; // PADRONIZADO
+    private int id;
+    private int imovelId;
+    private int clienteId;
+    private int corretorId;
     private LocalDate dataVisita;
 
-    public Visita(int id, int imovelId, int clienteId, int corretorId, LocalDate dataVisita) { // PADRONIZADO
+    public Visita(int id, int imovelId, int clienteId, int corretorId, LocalDate dataVisita) {
         this.id = id;
         this.imovelId = imovelId;
         this.clienteId = clienteId;
@@ -18,42 +18,42 @@ public class Visita {
         this.dataVisita = dataVisita;
     }
 
-    public Visita(int imovelId, int clienteId, int corretorId, LocalDate dataVisita) { // PADRONIZADO
+    public Visita(int imovelId, int clienteId, int corretorId, LocalDate dataVisita) {
         this.imovelId = imovelId;
         this.clienteId = clienteId;
         this.corretorId = corretorId;
         this.dataVisita = dataVisita;
     }
 
-    public int getId() { // PADRONIZADO
+    public int getId() {
         return id;
     }
 
-    public void setId(int id) { // PADRONIZADO
+    public void setId(int id) {
         this.id = id;
     }
 
-    public int getImovelId() { // PADRONIZADO
+    public int getImovelId() {
         return imovelId;
     }
 
-    public void setImovelId(int imovelId) { // PADRONIZADO
+    public void setImovelId(int imovelId) {
         this.imovelId = imovelId;
     }
 
-    public int getClienteId() { // PADRONIZADO
+    public int getClienteId() {
         return clienteId;
     }
 
-    public void setClienteId(int clienteId) { // PADRONIZADO
+    public void setClienteId(int clienteId) {
         this.clienteId = clienteId;
     }
 
-    public int getCorretorId() { // PADRONIZADO
+    public int getCorretorId() {
         return corretorId;
     }
 
-    public void setCorretorId(int corretorId) { // PADRONIZADO
+    public void setCorretorId(int corretorId) {
         this.corretorId = corretorId;
     }
 
@@ -68,10 +68,10 @@ public class Visita {
     @Override
     public String toString() {
         return "Visita{" +
-                "id=" + id + // PADRONIZADO
-                ", imovelId=" + imovelId + // PADRONIZADO
-                ", clienteId=" + clienteId + // PADRONIZADO
-                ", corretorId=" + corretorId + // PADRONIZADO
+                "id=" + id +
+                ", imovelId=" + imovelId +
+                ", clienteId=" + clienteId +
+                ", corretorId=" + corretorId +
                 ", dataVisita=" + dataVisita +
                 '}';
     }
@@ -81,11 +81,11 @@ public class Visita {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Visita visita = (Visita) o;
-        return id == visita.id; // PADRONIZADO
+        return id == visita.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id); // PADRONIZADO
+        return Objects.hash(id);
     }
 }

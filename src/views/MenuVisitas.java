@@ -36,7 +36,7 @@ public class MenuVisitas {
                 System.out.println("❌ Erro: Por favor, digite apenas números.");
                 opcao = -1;
             } finally {
-                scanner.nextLine(); // Limpa o buffer
+                scanner.nextLine();
             }
 
             switch (opcao) {
@@ -71,7 +71,7 @@ public class MenuVisitas {
             int clienteId = scanner.nextInt();
             System.out.print("ID do Corretor: ");
             int corretorId = scanner.nextInt();
-            scanner.nextLine(); // Limpa buffer
+            scanner.nextLine();
             
             System.out.print("Data da Visita (dd/MM/yyyy): ");
             String dataStr = scanner.nextLine();
@@ -99,11 +99,11 @@ public class MenuVisitas {
         } else {
             visitas.forEach(v -> System.out.printf(
                 "ID: %d | Data: %s | Imóvel ID: %d | Cliente ID: %d | Corretor ID: %d\n",
-                v.getId(), // PADRONIZADO
+                v.getId(),
                 v.getDataVisita().format(dateFormatter),
-                v.getImovelId(), // PADRONIZADO
-                v.getClienteId(), // PADRONIZADO
-                v.getCorretorId() // PADRONIZADO
+                v.getImovelId(),
+                v.getClienteId(),
+                v.getCorretorId()
             ));
         }
     }
@@ -113,7 +113,7 @@ public class MenuVisitas {
         try {
             System.out.print("Digite o ID da visita que deseja atualizar: ");
             int id = scanner.nextInt();
-            scanner.nextLine(); // Limpa buffer
+            scanner.nextLine();
 
             Visita visita = visitaDAO.buscarPorId(id);
             if (visita == null) {
@@ -145,7 +145,7 @@ public class MenuVisitas {
         try {
             System.out.print("Digite o ID da visita que deseja cancelar: ");
             int id = scanner.nextInt();
-            scanner.nextLine(); // Limpa buffer
+            scanner.nextLine();
 
             if (visitaDAO.excluir(id)) {
                 System.out.println("✅ Visita cancelada com sucesso!");

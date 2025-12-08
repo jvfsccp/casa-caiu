@@ -3,14 +3,14 @@ package models;
 import java.util.Objects;
 
 public class Corretor {
-    private int id; // PADRONIZADO
+    private int id;
     private String cpf;
     private String nome;
     private String creci;
     private String telefone;
     private String email;
 
-    public Corretor(int id, String cpf, String nome, String creci, String telefone, String email) { // PADRONIZADO
+    public Corretor(int id, String cpf, String nome, String creci, String telefone, String email) {
         this.id = id;
         this.cpf = cpf;
         this.nome = nome;
@@ -27,11 +27,11 @@ public class Corretor {
         this.email = email;
     }
 
-    public int getId() { // PADRONIZADO
+    public int getId() {
         return id;
     }
 
-    public void setId(int id) { // PADRONIZADO
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -78,7 +78,7 @@ public class Corretor {
     @Override
     public String toString() {
         return "Corretor{" +
-                "id=" + id + // PADRONIZADO
+                "id=" + id +
                 ", cpf='" + cpf + '\'' +
                 ", nome='" + nome + '\'' +
                 ", creci='" + creci + '\'' +
@@ -92,11 +92,11 @@ public class Corretor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Corretor corretor = (Corretor) o;
-        return id == corretor.id; // PADRONIZADO
+        return id == corretor.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id); // PADRONIZADO
+        return Objects.hash(id);
     }
 }

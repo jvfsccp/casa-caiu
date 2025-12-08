@@ -3,13 +3,13 @@ package models;
 import java.util.Objects;
 
 public class Cliente {
-    private int id; // PADRONIZADO
+    private int id;
     private String cpf;
     private String nome;
     private String telefone;
     private String email;
 
-    public Cliente(int id, String cpf, String nome, String telefone, String email) { // PADRONIZADO
+    public Cliente(int id, String cpf, String nome, String telefone, String email) {
         this.id = id;
         this.cpf = cpf;
         this.nome = nome;
@@ -24,11 +24,11 @@ public class Cliente {
         this.email = email;
     }
 
-    public int getId() { // PADRONIZADO
+    public int getId() {
         return id;
     }
 
-    public void setId(int id) { // PADRONIZADO
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -67,7 +67,7 @@ public class Cliente {
     @Override
     public String toString() {
         return "Cliente{" +
-                "id=" + id + // PADRONIZADO
+                "id=" + id +
                 ", cpf='" + cpf + '\'' +
                 ", nome='" + nome + '\'' +
                 ", telefone='" + telefone + '\'' +
@@ -80,11 +80,11 @@ public class Cliente {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return id == cliente.id; // PADRONIZADO
+        return id == cliente.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id); // PADRONIZADO
+        return Objects.hash(id);
     }
 }

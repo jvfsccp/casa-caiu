@@ -52,7 +52,7 @@ public class MenuRelatorios {
                 System.out.println("❌ Erro: Por favor, digite apenas números.");
                 opcao = -1;
             } finally {
-                scanner.nextLine(); // Limpa o buffer
+                scanner.nextLine();
             }
 
             switch (opcao) {

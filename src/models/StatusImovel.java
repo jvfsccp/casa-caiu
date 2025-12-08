@@ -3,10 +3,10 @@ package models;
 import java.util.Objects;
 
 public class StatusImovel {
-    private int id; // PADRONIZADO
+    private int id;
     private String descricao;
 
-    public StatusImovel(int id, String descricao) { // PADRONIZADO
+    public StatusImovel(int id, String descricao) {
         this.id = id;
         this.descricao = descricao;
     }
@@ -15,11 +15,11 @@ public class StatusImovel {
         this.descricao = descricao;
     }
 
-    public int getId() { // PADRONIZADO
+    public int getId() {
         return id;
     }
 
-    public void setId(int id) { // PADRONIZADO
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -34,7 +34,7 @@ public class StatusImovel {
     @Override
     public String toString() {
         return "StatusImovel{" +
-                "id=" + id + // PADRONIZADO
+                "id=" + id +
                 ", descricao='" + descricao + '\'' +
                 '}';
     }
@@ -44,11 +44,11 @@ public class StatusImovel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StatusImovel that = (StatusImovel) o;
-        return id == that.id; // PADRONIZADO
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id); // PADRONIZADO
+        return Objects.hash(id);
     }
 }

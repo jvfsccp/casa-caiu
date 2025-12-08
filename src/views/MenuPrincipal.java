@@ -41,9 +41,9 @@ public class MenuPrincipal {
                 opcao = scanner.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("❌ Erro: Por favor, digite apenas números.");
-                opcao = -1; // Reseta a opção para continuar no loop
+                opcao = -1;
             } finally {
-                scanner.nextLine(); // Limpa o buffer do scanner
+                scanner.nextLine();
             }
 
             switch (opcao) {
@@ -70,7 +70,6 @@ public class MenuPrincipal {
                     System.out.println("Obrigado por usar o Sistema Casa Caiu!");
                     break;
                 case -1:
-                    // Não faz nada, apenas continua o loop para nova entrada
                     break;
                 default:
                     System.out.println("❌ Opção inválida! Tente novamente.");

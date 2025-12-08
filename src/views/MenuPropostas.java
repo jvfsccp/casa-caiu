@@ -36,7 +36,7 @@ public class MenuPropostas {
                 System.out.println("❌ Erro: Por favor, digite apenas números.");
                 opcao = -1;
             } finally {
-                scanner.nextLine(); // Limpa o buffer
+                scanner.nextLine();
             }
 
             switch (opcao) {
@@ -69,7 +69,7 @@ public class MenuPropostas {
             int imovelId = scanner.nextInt();
             System.out.print("ID do Cliente: ");
             int clienteId = scanner.nextInt();
-            scanner.nextLine(); // Limpa buffer
+            scanner.nextLine();
             
             System.out.print("Data da Proposta (dd/MM/yyyy): ");
             String dataStr = scanner.nextLine();
@@ -97,10 +97,10 @@ public class MenuPropostas {
         } else {
             propostas.forEach(p -> System.out.printf(
                 "ID: %d | Data: %s | Imóvel ID: %d | Cliente ID: %d\n",
-                p.getId(), // PADRONIZADO
+                p.getId(),
                 p.getDataProposta().format(dateFormatter),
-                p.getImovelId(), // PADRONIZADO
-                p.getClienteId() // PADRONIZADO
+                p.getImovelId(),
+                p.getClienteId()
             ));
         }
     }
