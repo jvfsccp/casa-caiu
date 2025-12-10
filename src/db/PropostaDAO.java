@@ -28,8 +28,6 @@ public class PropostaDAO {
                 return true;
             }
         } catch (SQLException e) {
-            System.err.println("Erro ao inserir proposta: " + e.getMessage());
-            e.printStackTrace();
         }
         return false;
     }
@@ -50,7 +48,6 @@ public class PropostaDAO {
             }
         } catch (SQLException e) {
             System.err.println("Erro ao buscar proposta: " + e.getMessage());
-            e.printStackTrace();
         }
         return null;
     }
@@ -72,7 +69,6 @@ public class PropostaDAO {
             }
         } catch (SQLException e) {
             System.err.println("Erro ao listar propostas: " + e.getMessage());
-            e.printStackTrace();
         }
         return propostas;
     }
@@ -87,7 +83,6 @@ public class PropostaDAO {
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Erro ao atualizar proposta: " + e.getMessage());
-            e.printStackTrace();
         }
         return false;
     }
@@ -99,7 +94,6 @@ public class PropostaDAO {
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Erro ao excluir proposta: " + e.getMessage());
-            e.printStackTrace();
         }
         return false;
     }
@@ -122,7 +116,6 @@ public class PropostaDAO {
             }
         } catch (SQLException e) {
             System.err.println("Erro ao buscar propostas por imóvel: " + e.getMessage());
-            e.printStackTrace();
         }
         return propostas;
     }
@@ -145,7 +138,6 @@ public class PropostaDAO {
             }
         } catch (SQLException e) {
             System.err.println("Erro ao buscar propostas por cliente: " + e.getMessage());
-            e.printStackTrace();
         }
         return propostas;
     }
@@ -168,7 +160,6 @@ public class PropostaDAO {
             }
         } catch (SQLException e) {
             System.err.println("Erro ao buscar propostas por data: " + e.getMessage());
-            e.printStackTrace();
         }
         return propostas;
     }
@@ -183,7 +174,6 @@ public class PropostaDAO {
             }
         } catch (SQLException e) {
             System.err.println("Erro ao contar propostas: " + e.getMessage());
-            e.printStackTrace();
         }
         return 0;
     }
@@ -198,7 +188,6 @@ public class PropostaDAO {
             }
         } catch (SQLException e) {
             System.err.println("Erro ao contar propostas: " + e.getMessage());
-            e.printStackTrace();
         }
         return 0;
     }

@@ -173,16 +173,20 @@ public class MenuCorretores {
         scanner.nextLine();
 
         Corretor corretor = null;
+        String criterio = "";
 
         switch (opcao) {
             case 1:
                 System.out.print("ID do Corretor: ");
                 int id = scanner.nextInt();
+                scanner.nextLine();
+                criterio = "ID " + id;
                 corretor = corretorDAO.buscarPorId(id);
                 break;
             case 2:
                 System.out.print("Email: ");
                 String email = scanner.nextLine();
+                criterio = "email " + email;
                 corretor = corretorDAO.buscarPorEmail(email);
                 break;
             default:
@@ -197,7 +201,7 @@ public class MenuCorretores {
                 corretor.getId(), corretor.getNome(), corretor.getCreci(), corretor.getCpf(), corretor.getTelefone(), corretor.getEmail()
             );
         } else {
-            System.out.println("❌ Corretor não encontrado!");
+            System.out.println("❌ Corretor com " + criterio + " não encontrado.");
         }
     }
 
@@ -209,7 +213,7 @@ public class MenuCorretores {
 
         Corretor corretor = corretorDAO.buscarPorId(id);
         if (corretor == null) {
-            System.out.println("❌ Corretor não encontrado!");
+            System.out.println("❌ Corretor com ID " + id + " não encontrado.");
             return;
         }
 
@@ -258,7 +262,7 @@ public class MenuCorretores {
 
         Corretor corretor = corretorDAO.buscarPorId(id);
         if (corretor == null) {
-            System.out.println("❌ Corretor não encontrado!");
+            System.out.println("❌ Corretor com ID " + id + " não encontrado.");
             return;
         }
 

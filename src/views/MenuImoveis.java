@@ -81,7 +81,7 @@ public class MenuImoveis {
         
         ArrayList<TipoImovel> tipos = tipoImovelDAO.listarTodos();
         if (tipos.isEmpty()) {
-            System.out.println("❌ Nenhum tipo de imóvel cadastrado! Cadastre primeiro.");
+            System.out.println("📋 Nenhum tipo de imóvel cadastrado. Por favor, cadastre um tipo primeiro.");
             return;
         }
         
@@ -96,7 +96,7 @@ public class MenuImoveis {
         
         ArrayList<StatusImovel> status = statusImovelDAO.listarTodos();
         if (status.isEmpty()) {
-            System.out.println("❌ Nenhum status de imóvel cadastrado! Cadastre primeiro.");
+            System.out.println("📋 Nenhum status de imóvel cadastrado. Por favor, cadastre um status primeiro.");
             return;
         }
         
@@ -176,6 +176,7 @@ public class MenuImoveis {
         System.out.println("\n--- BUSCAR IMÓVEL ---");
         System.out.print("ID do Imóvel: ");
         int id = scanner.nextInt();
+        scanner.nextLine();
 
         Imovel imovel = imovelDAO.buscarPorId(id);
         if (imovel != null) {
@@ -188,7 +189,7 @@ public class MenuImoveis {
                 imovel.getStatusImovelId()
             );
         } else {
-            System.out.println("❌ Imóvel não encontrado!");
+            System.out.println("❌ Imóvel com ID " + id + " não encontrado.");
         }
     }
 
@@ -200,7 +201,7 @@ public class MenuImoveis {
 
         Imovel imovel = imovelDAO.buscarPorId(id);
         if (imovel == null) {
-            System.out.println("❌ Imóvel não encontrado!");
+            System.out.println("❌ Imóvel com ID " + id + " não encontrado.");
             return;
         }
 
@@ -252,7 +253,7 @@ public class MenuImoveis {
 
         Imovel imovel = imovelDAO.buscarPorId(id);
         if (imovel == null) {
-            System.out.println("❌ Imóvel não encontrado!");
+            System.out.println("❌ Imóvel com ID " + id + " não encontrado.");
             return;
         }
 
@@ -291,8 +292,12 @@ public class MenuImoveis {
         switch (opcao) {
             case 1:
                 ArrayList<TipoImovel> tipos = tipoImovelDAO.listarTodos();
-                System.out.println("\n📋 Tipos cadastrados:");
-                tipos.forEach(t -> System.out.printf("ID: %d | Descrição: %s\n", t.getId(), t.getDescricao()));
+                if (tipos.isEmpty()) {
+                    System.out.println("📋 Nenhum tipo de imóvel cadastrado.");
+                } else {
+                    System.out.println("\n📋 Tipos cadastrados:");
+                    tipos.forEach(t -> System.out.printf("ID: %d | Descrição: %s\n", t.getId(), t.getDescricao()));
+                }
                 break;
             case 2:
                 System.out.print("Descrição do tipo: ");
@@ -315,6 +320,8 @@ public class MenuImoveis {
                     if (tipoImovelDAO.atualizar(tipoAtual)) {
                         System.out.println("✅ Tipo atualizado!");
                     }
+                } else {
+                    System.out.println("❌ Tipo de Imóvel com ID " + id + " não encontrado.");
                 }
                 break;
             case 4:
@@ -342,8 +349,12 @@ public class MenuImoveis {
         switch (opcao) {
             case 1:
                 ArrayList<StatusImovel> statusList = statusImovelDAO.listarTodos();
-                System.out.println("\n📋 Status cadastrados:");
-                statusList.forEach(s -> System.out.printf("ID: %d | Descrição: %s\n", s.getId(), s.getDescricao()));
+                if (statusList.isEmpty()) {
+                    System.out.println("📋 Nenhum status de imóvel cadastrado.");
+                } else {
+                    System.out.println("\n📋 Status cadastrados:");
+                    statusList.forEach(s -> System.out.printf("ID: %d | Descrição: %s\n", s.getId(), s.getDescricao()));
+                }
                 break;
             case 2:
                 System.out.print("Descrição do status: ");
@@ -366,6 +377,8 @@ public class MenuImoveis {
                     if (statusImovelDAO.atualizar(statusAtual)) {
                         System.out.println("✅ Status atualizado!");
                     }
+                } else {
+                    System.out.println("❌ Status de Imóvel com ID " + id + " não encontrado.");
                 }
                 break;
             case 4:

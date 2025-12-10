@@ -81,7 +81,7 @@ public class MenuVisitas {
             if (visitaDAO.inserir(visita)) {
                 System.out.println("✅ Visita agendada com sucesso!");
             } else {
-                System.out.println("❌ Erro ao agendar visita.");
+                System.out.println("❌ Erro ao agendar visita. Verifique se os IDs de imóvel, cliente e corretor são válidos.");
             }
         } catch (InputMismatchException e) {
             System.out.println("❌ Erro: ID deve ser um número.");
@@ -95,7 +95,7 @@ public class MenuVisitas {
         System.out.println("\n--- Lista de Visitas Agendadas ---");
         ArrayList<Visita> visitas = visitaDAO.listarTodos();
         if (visitas.isEmpty()) {
-            System.out.println("Nenhuma visita agendada.");
+            System.out.println("📋 Nenhuma visita agendada.");
         } else {
             visitas.forEach(v -> System.out.printf(
                 "ID: %d | Data: %s | Imóvel ID: %d | Cliente ID: %d | Corretor ID: %d\n",
@@ -117,7 +117,7 @@ public class MenuVisitas {
 
             Visita visita = visitaDAO.buscarPorId(id);
             if (visita == null) {
-                System.out.println("❌ Visita não encontrada.");
+                System.out.println("❌ Visita com ID " + id + " não encontrada.");
                 return;
             }
 
@@ -150,7 +150,7 @@ public class MenuVisitas {
             if (visitaDAO.excluir(id)) {
                 System.out.println("✅ Visita cancelada com sucesso!");
             } else {
-                System.out.println("❌ Erro: Visita não encontrada ou não pôde ser cancelada.");
+                System.out.println("❌ Erro: Visita com ID " + id + " não encontrada.");
             }
         } catch (InputMismatchException e) {
             System.out.println("❌ Erro: ID deve ser um número.");

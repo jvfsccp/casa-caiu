@@ -1,5 +1,7 @@
 package views;
 
+import db.ClienteDAO;
+import db.ImovelDAO;
 import db.PropostaDAO;
 import models.Proposta;
 import java.time.LocalDate;
@@ -12,11 +14,15 @@ import java.util.Scanner;
 public class MenuPropostas {
     private Scanner scanner;
     private PropostaDAO propostaDAO;
+    private ClienteDAO clienteDAO;
+    private ImovelDAO imovelDAO;
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public MenuPropostas() {
         this.scanner = new Scanner(System.in);
         this.propostaDAO = new PropostaDAO();
+        this.clienteDAO = new ClienteDAO();
+        this.imovelDAO = new ImovelDAO();
     }
 
     public void exibir() {
@@ -65,11 +71,23 @@ public class MenuPropostas {
     private void criarProposta() {
         System.out.println("\n--- Criar Nova Proposta ---");
         try {
-            System.out.print("ID do Imóvel: ");
-            int imovelId = scanner.nextInt();
             System.out.print("ID do Cliente: ");
             int clienteId = scanner.nextInt();
+            
+            if (clienteDAO.buscarPorId(clienteId) == null) {
+                System.out.println("❌ Erro: Cliente com ID " + clienteId + " não encontrado.");
+                scanner.nextLine();
+                return;
+            }
+
+            System.out.print("ID do Imóvel: ");
+            int imovelId = scanner.nextInt();
             scanner.nextLine();
+
+            if (imovelDAO.buscarPorId(imovelId) == null) {
+                System.out.println("❌ Erro: Imóvel com ID " + imovelId + " não encontrado.");
+                return;
+            }
             
             System.out.print("Data da Proposta (dd/MM/yyyy): ");
             String dataStr = scanner.nextLine();
@@ -79,7 +97,7 @@ public class MenuPropostas {
             if (propostaDAO.inserir(proposta)) {
                 System.out.println("✅ Proposta criada com sucesso!");
             } else {
-                System.out.println("❌ Erro ao criar proposta.");
+                System.out.println("❌ Erro ao criar proposta. A causa mais provável é um erro de banco de dados.");
             }
         } catch (InputMismatchException e) {
             System.out.println("❌ Erro: ID deve ser um número.");
@@ -93,7 +111,7 @@ public class MenuPropostas {
         System.out.println("\n--- Lista de Propostas ---");
         ArrayList<Proposta> propostas = propostaDAO.listarTodos();
         if (propostas.isEmpty()) {
-            System.out.println("Nenhuma proposta encontrada.");
+            System.out.println("📋 Nenhuma proposta cadastrada.");
         } else {
             propostas.forEach(p -> System.out.printf(
                 "ID: %d | Data: %s | Imóvel ID: %d | Cliente ID: %d\n",
@@ -114,7 +132,7 @@ public class MenuPropostas {
 
             Proposta proposta = propostaDAO.buscarPorId(id);
             if (proposta == null) {
-                System.out.println("❌ Proposta não encontrada.");
+                System.out.println("❌ Proposta com ID " + id + " não encontrada.");
                 return;
             }
 
@@ -147,7 +165,7 @@ public class MenuPropostas {
             if (propostaDAO.excluir(id)) {
                 System.out.println("✅ Proposta excluída com sucesso!");
             } else {
-                System.out.println("❌ Erro: Proposta não encontrada ou não pôde ser excluída.");
+                System.out.println("❌ Erro: Proposta com ID " + id + " não encontrada.");
             }
         } catch (InputMismatchException e) {
             System.out.println("❌ Erro: ID deve ser um número.");

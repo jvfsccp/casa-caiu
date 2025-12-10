@@ -10,6 +10,7 @@ public class MenuPrincipal {
     private MenuCorretores menuCorretores;
     private MenuVisitas menuVisitas;
     private MenuPropostas menuPropostas;
+    private MenuInteresses menuInteresses;
     private MenuRelatorios menuRelatorios;
 
     public MenuPrincipal() {
@@ -19,6 +20,7 @@ public class MenuPrincipal {
         this.menuCorretores = new MenuCorretores();
         this.menuVisitas = new MenuVisitas();
         this.menuPropostas = new MenuPropostas();
+        this.menuInteresses = new MenuInteresses();
         this.menuRelatorios = new MenuRelatorios();
     }
 
@@ -32,8 +34,9 @@ public class MenuPrincipal {
             System.out.println("2. Gerenciar Clientes");
             System.out.println("3. Gerenciar Corretores");
             System.out.println("4. Gerenciar Visitas");
-            System.out.println("5. Gerenciar Propostas");
-            System.out.println("6. Emitir Relatórios");
+            System.out.println("5. Gerenciar Interesses");
+            System.out.println("6. Gerenciar Propostas");
+            System.out.println("7. Emitir Relatórios");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -60,9 +63,12 @@ public class MenuPrincipal {
                     menuVisitas.exibir();
                     break;
                 case 5:
-                    menuPropostas.exibir();
+                    menuInteresses.exibir();
                     break;
                 case 6:
+                    menuPropostas.exibir();
+                    break;
+                case 7:
                     menuRelatorios.exibir();
                     break;
                 case 0:

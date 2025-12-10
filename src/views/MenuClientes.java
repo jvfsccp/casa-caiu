@@ -153,16 +153,20 @@ public class MenuClientes {
         scanner.nextLine();
 
         Cliente cliente = null;
+        String criterio = "";
 
         switch (opcao) {
             case 1:
                 System.out.print("ID do Cliente: ");
                 int id = scanner.nextInt();
+                scanner.nextLine();
+                criterio = "ID " + id;
                 cliente = clienteDAO.buscarPorId(id);
                 break;
             case 2:
                 System.out.print("Email: ");
                 String email = scanner.nextLine();
+                criterio = "email " + email;
                 cliente = clienteDAO.buscarPorEmail(email);
                 break;
             default:
@@ -177,7 +181,7 @@ public class MenuClientes {
                 cliente.getId(), cliente.getNome(), cliente.getCpf(), cliente.getTelefone(), cliente.getEmail()
             );
         } else {
-            System.out.println("❌ Cliente não encontrado!");
+            System.out.println("❌ Cliente com " + criterio + " não encontrado.");
         }
     }
 
@@ -189,7 +193,7 @@ public class MenuClientes {
 
         Cliente cliente = clienteDAO.buscarPorId(id);
         if (cliente == null) {
-            System.out.println("❌ Cliente não encontrado!");
+            System.out.println("❌ Cliente com ID " + id + " não encontrado.");
             return;
         }
 
@@ -234,7 +238,7 @@ public class MenuClientes {
 
         Cliente cliente = clienteDAO.buscarPorId(id);
         if (cliente == null) {
-            System.out.println("❌ Cliente não encontrado!");
+            System.out.println("❌ Cliente com ID " + id + " não encontrado.");
             return;
         }
 
